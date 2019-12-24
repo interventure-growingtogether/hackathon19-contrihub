@@ -64,7 +64,7 @@ const Search = ({ repos, history, getRepoData }) => {
 					<Select.Option value="golang">golang</Select.Option>
 					<Select.Option value="java">java</Select.Option>
 					<Select.Option value="python">python</Select.Option>
-					<Select.Option value="c#">dotnet</Select.Option>
+					<Select.Option value="csharp">c#</Select.Option>
 					<Select.Option value="haskell">haskell</Select.Option>
 					<Select.Option value="c++">c++</Select.Option>
 					<Select.Option value="ruby">ruby</Select.Option>
