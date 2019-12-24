@@ -1,4 +1,5 @@
 .RepoDetails {
+	color: white;
 }
 
 .RepoDetails__Sidebar {
@@ -6,6 +7,7 @@
 	flex-direction: column;
 	align-items: center;
 	padding-top: 2rem;
+	color: white;
 }
 
 .RepoDetails__Header {

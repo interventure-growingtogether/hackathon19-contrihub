@@ -8,8 +8,8 @@ import LoginButton from './components/Auth/LoginButton';
 import Auth from './components/Auth/Auth';
 import Search from './components/Search/Search';
 
-import './App.css';
 import 'antd/dist/antd.css';
+import './App.css';
 import { getRepoData } from './Redux/actions/getRepoData';
 
 function App({ getRepoData, repos }) {
