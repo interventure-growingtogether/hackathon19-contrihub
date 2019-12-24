@@ -3,6 +3,8 @@ import { Route } from 'react-router-dom';
 import { PageHeader, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 
+import AddProject from "./Containers/AddProject";
+
 import RepoDetails from './components/RepoDetails/RepoDetails';
 import LoginButton from './components/Auth/LoginButton';
 import Auth from './components/Auth/Auth';
@@ -30,7 +32,8 @@ function App({ getRepoData, repos }) {
 
 				<Route path="/auth" component={Auth} />
 				<Route path="/details" component={RepoDetails} />
-				<Route path="/" component={Search} />
+				<Route path="/create" component={AddProject} />
+				<Route path="/" exact component={Search} />
 			</Col>
 		</Row>
 	);
