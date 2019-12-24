@@ -51,3 +51,24 @@ h6 {
 .ant-page-header-content {
 	padding: 0!important;
 }
+.ant-tag {
+	margin-bottom: 5px;
+}
+
+.ant-card-body {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 85%;
+}
+
+.cardsBody--tags {
+	height: 170px;
+	overflow: auto;
+
+}
+
+.cardsBody--stars {
+
+}

@@ -10,7 +10,7 @@ const Search = ({ repos, history }) => {
 	return (
 		<div style={{ position: 'relative', top: 0, bottom: 0 }}>
 			<Input.Group compact>
-				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '20px', width: '60%' }} />
+				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '10px', width: '80%' }} />
 				<Select defaultValue="any language" size="large" style={{ width: '20%' }} placeholder="any language">
 					<Select.Option value="javascript">javascript</Select.Option>
 					<Select.Option value="rust">rust</Select.Option>
@@ -24,7 +24,7 @@ const Search = ({ repos, history }) => {
 					<Select.Option value="v">v lol</Select.Option>
 				</Select>
 
-				<Select size="large" style={{ width: '20%' }} mode="multiple" placeholder="any license">
+				<Select defaultValue="any licence" size="large" style={{ width: 'auto', marginBottom: '10px' }} mode="multiple" placeholder="any license">
 					<Select.Option value="apache-2.0">apache 2.0</Select.Option>
 					<Select.Option value="mit">MIT</Select.Option>
 					<Select.Option value="gpl-2.0">GPL 2.0</Select.Option>
@@ -32,17 +32,17 @@ const Search = ({ repos, history }) => {
 				</Select>
 			</Input.Group>
 
-			<Row gutter={[10, 10]} type="flex" style={{ overflow: 'auto' }}>
+			<Row gutter={[10, 10]} type="flex" style={{ overflow: 'auto' , height: '80vh'}}>
 				{repos &&
 					repos.map(project => (
 						<Col key={project.full_name} span={6} onClick={() => history.push(`details/${project.id}`)}>
 							<Card title={project.full_name} bordered hoverable extra={project.language}>
-								<div>
+								<div className='cardsBody--tags'>
 									{project.topics &&
 										project.topics.map(topic => <Tag key={`${project.name}-tag-${topic}`}>{topic}</Tag>)}
 								</div>
 
-								<div style={{ marginTop: '10px' }}>
+								<div className='cardsBody--stars' style={{ marginTop: '10px'}}>
 									<ProjectIcon type="star" number={project.stargazers_count} />
 									<ProjectIcon type="eye" number={project.open_issues} />
 								</div>
