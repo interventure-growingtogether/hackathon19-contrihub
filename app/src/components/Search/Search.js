@@ -1,12 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Row, Col, Card, Tag, Input} from "antd";
+import {Row, Col, Card, Tag, Input, InputGroup, Select} from "antd";
 
 import ProjectIcon from './ProjectIcon';
 
 const Search = ({projects}) => {
 	return <div>
-		<Input.Search placeholder="Search projects..." size="large" style={{marginBottom: '20px'}} />
+		<Input.Group compact>
+			<Input.Search placeholder="Project name" size="large" style={{marginBottom: '20px', width: '50%'}} />
+			<Select size="large" style={{width: '150px'}}>
+				<Select.Option value="">any language</Select.Option>
+				<Select.Option value="javascript">javascript</Select.Option>
+				<Select.Option value="rust">rust</Select.Option>
+				<Select.Option value="golang">golang</Select.Option>
+				<Select.Option value="java">java</Select.Option>
+				<Select.Option value="python">python</Select.Option>
+				<Select.Option value="dotnet">dotnet</Select.Option>
+				<Select.Option value="haskell">haskell</Select.Option>
+				<Select.Option value="c++">c++</Select.Option>
+				<Select.Option value="ruby">ruby</Select.Option>
+				<Select.Option value="v">v lol</Select.Option>
+			</Select>
+		</Input.Group>
+
 		<Row gutter={[10, 10]} type="flex">
 			{projects.map(project => (
 				<Col key={project.name} span={6}>
