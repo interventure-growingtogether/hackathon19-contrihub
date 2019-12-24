@@ -31,7 +31,7 @@ function App({ getRepoData, repos, spinnerVisible }) {
 				<Col offset={1} span={22} className="App">
 					<PageHeader className="Page__header" title="ContribHub">
 						<Link to={'/Search'}>
-							<Button style={{ margin: '.5rem' }}>Home</Button>
+							<Button style={{ margin: '.5rem' }}>GitHub Projects</Button>
 						</Link>
 						<Link to={'/cprojects'}>
 							<Button style={{ margin: '.5rem' }}>ContribHub Projects</Button>

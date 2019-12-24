@@ -49,7 +49,12 @@ const Search = ({ repos, history, getRepoData }) => {
 	return (
 		<div style={{ position: 'relative', top: 0, bottom: 0 }}>
 			<Input.Group compact>
-				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '10px', width: '80%' }} onChange={changeName} />
+				<Input.Search
+					placeholder="Project name"
+					size="large"
+					style={{ marginBottom: '10px', width: '80%' }}
+					onChange={changeName}
+				/>
 
 				<Select
 					defaultValue="any language"
@@ -85,7 +90,7 @@ const Search = ({ repos, history, getRepoData }) => {
 				</Select>
 			</Input.Group>
 
-			<Row gutter={[10, 10]} type="flex" style={{ overflow: 'auto', height: '80vh' }}>
+			<Row gutter={[10, 10]} type="flex" style={{ overflow: 'auto', height: '75vh' }}>
 				{repos &&
 					repos.map(project => (
 						<Col key={project.full_name} span={6} onClick={() => history.push(`details/${project.id}`)}>
