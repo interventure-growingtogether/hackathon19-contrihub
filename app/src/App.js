@@ -1,24 +1,30 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-import 'antd/dist/antd.css';
-
-import LoginButton from './components/Auth/LoginButton';
-import Auth from './components/Auth/Auth';
+import { PageHeader } from 'antd';
 import { Provider } from 'react-redux';
 
 import store from './Redux';
 
-import './App.css';
+import RepoDetails from './components/RepoDetails/RepoDetails';
+import LoginButton from './components/Auth/LoginButton';
+import Auth from './components/Auth/Auth';
+import Search from './components/Search';
+
+import "./App.css";
+import 'antd/dist/antd.css';
 
 const Root = () => (
 	<Provider store={store}>
 		<Router>
-			<div className="App">
-				<LoginButton />
+			<main className="App">
+				<PageHeader className="Page__header" title="ContriHub">
+					<LoginButton />
+				</PageHeader>
 
 				<Route path="/auth" component={Auth} />
-			</div>
+				<Route path="/details" component={RepoDetails} />
+				<Route path="/landing" component={Search} />
+			</main>
 		</Router>
 	</Provider>
 );
