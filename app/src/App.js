@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { PageHeader } from 'antd';
 
 import 'antd/dist/antd.css';
 
@@ -10,15 +11,19 @@ import { Provider } from 'react-redux';
 import store from './Redux';
 
 import './App.css';
+import RepoDetails from './components/RepoDetails/RepoDetails';
 
 const Root = () => (
 	<Provider store={store}>
 		<Router>
-			<div className="App">
-				<LoginButton />
+			<main className="App">
+				<PageHeader title="ContriHub">
+					<LoginButton />
+				</PageHeader>
 
 				<Route path="/auth" component={Auth} />
-			</div>
+				<Route path="/details" component={RepoDetails} />
+			</main>
 		</Router>
 	</Provider>
 );
