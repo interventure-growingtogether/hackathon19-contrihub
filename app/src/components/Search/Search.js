@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { Row, Col, Card, Tag, Input, Select } from 'antd';
 
 import ProjectIcon from './ProjectIcon';
 
-import {getRepoData} from '../../Redux/actions/getRepoData';
+import { getRepoData } from '../../Redux/actions/getRepoData';
 
 const Search = ({ repos, history, getRepoData }) => {
 	const [language, setLanguage] = useState(undefined);
@@ -34,7 +34,13 @@ const Search = ({ repos, history, getRepoData }) => {
 					<Select.Option value="v">v lol</Select.Option>
 				</Select>
 
-				<Select defaultValue="any licence" size="large" style={{ width: '80%', marginBottom: '10px' }} mode="multiple" placeholder="any license">
+				<Select
+					defaultValue="any licence"
+					size="large"
+					style={{ width: '80%', marginBottom: '10px' }}
+					mode="multiple"
+					placeholder="any license"
+				>
 					<Select.Option value="apache-2.0">apache 2.0</Select.Option>
 					<Select.Option value="mit">MIT</Select.Option>
 					<Select.Option value="gpl-2.0">GPL 2.0</Select.Option>
@@ -42,17 +48,19 @@ const Search = ({ repos, history, getRepoData }) => {
 				</Select>
 			</Input.Group>
 
-			<Row gutter={[10, 10]} type="flex" style={{ overflow: 'auto' , height: '80vh'}}>
+			<Row gutter={[10, 10]} type="flex" style={{ overflow: 'auto', height: '80vh' }}>
 				{repos &&
 					repos.map(project => (
 						<Col key={project.full_name} span={6} onClick={() => history.push(`details/${project.id}`)}>
 							<Card title={project.full_name} bordered hoverable extra={project.language}>
-								<div className='cardsBody--tags'>
+								<div className="cardsBody--tags">
 									{project.topics &&
-										project.topics.map(topic => <Tag key={`${project.name}-tag-${topic}`}>{topic}</Tag>)}
+										project.topics.map(topic => (
+											<Tag key={`${project.name}-tag-${topic}`}>{topic}</Tag>
+										))}
 								</div>
 
-								<div className='cardsBody--stars' style={{ marginTop: '10px'}}>
+								<div className="cardsBody--stars" style={{ marginTop: '10px' }}>
 									<ProjectIcon type="star" number={project.stargazers_count} />
 									<ProjectIcon type="eye" number={project.open_issues} />
 								</div>
@@ -119,4 +127,4 @@ const mapStateToProps = state => ({
 	repos: state.repos.data,
 });
 
-export default withRouter(connect(mapStateToProps, {getRepoData})(Search));
+export default withRouter(connect(mapStateToProps, { getRepoData })(Search));
