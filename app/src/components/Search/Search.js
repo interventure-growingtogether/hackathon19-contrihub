@@ -39,7 +39,13 @@ const Search = ({ repos, history, getRepoData }) => {
 			<Input.Group compact>
 				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '10px', width: '80%' }} />
 
-				<Select defaultValue="any language" size="large" style={{ width: '20%' }} defaultValue="" onChange={changeLanguage}>
+				<Select
+					defaultValue="any language"
+					size="large"
+					style={{ width: '20%' }}
+					defaultValue=""
+					onChange={changeLanguage}
+				>
 					<Select.Option value="">any language</Select.Option>
 					<Select.Option value="javascript">javascript</Select.Option>
 					<Select.Option value="rust">rust</Select.Option>
