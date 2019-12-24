@@ -6,7 +6,7 @@ import { Layout, Avatar, Descriptions, Typography, Divider } from 'antd';
 import Spinner from '../Spinner/Spinner';
 import './RepoDetails.css';
 
-const { Title, Paragraph, Text } = Typography;
+const { Paragraph } = Typography;
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -23,21 +23,19 @@ class RepoDetails extends Component {
 				<Sider className="RepoDetails__Sidebar">
 					<Avatar size={150} icon="user" src={repo && repo.owner && repo.owner.avatar_url} />
 					<h5 style={{ paddingTop: '2rem', textAlign: 'center' }}>Project owner</h5>
-					<h2>{repo && repo.owner && repo.owner.login}</h2>
+					<h2 style={{ textAlign: 'center' }}>{repo && repo.owner && repo.owner.login}</h2>
 				</Sider>
 
-				<Layout>
+				<Layout className='RepoDetails__Content'>
 					<Header className="RepoDetails__Header">{repo ? repo.full_name : ''}</Header>
 
-					<Divider />
-
-					<Paragraph style={{ paddingLeft: '1rem', paddingRight: '1rem', marginBottom: 0 }}>
+					<Paragraph style={{ paddingLeft: '0', paddingRight: '1rem', marginBottom: 0 }}>
 						{repo ? repo.description : null}
 					</Paragraph>
 
 					<Divider />
 
-					<Content style={{ color: 'black', padding: '2rem' }}>
+					<Content>
 						<Descriptions title="Repo details">
 							<Descriptions.Item label="Github stars">
 								{repo ? repo.stargazers_count : null}
@@ -55,7 +53,7 @@ class RepoDetails extends Component {
 						<Divider />
 					</Content>
 
-					<Footer>Contributors here?</Footer>
+					<Footer style={{ paddingLeft: '0', background: 'none' }}>Contributors here?</Footer>
 				</Layout>
 			</Layout>
 		);

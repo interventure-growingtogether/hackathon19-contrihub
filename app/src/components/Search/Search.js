@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Row, Col, Card, Tag, Input, InputGroup, Select} from "antd";
+import {Row, Col, Card, Tag, Input, Select} from "antd";
 
 import ProjectIcon from './ProjectIcon';
 
 const Search = ({projects}) => {
 	return <div>
 		<Input.Group compact>
-			<Input.Search placeholder="Project name" size="large" style={{marginBottom: '20px', width: '50%'}} />
-			<Select size="large" style={{width: '150px'}}>
+			<Input.Search placeholder="Project name" size="large" style={{marginBottom: '20px', width: '80%'}} />
+			<Select defaultValue="any language" size="large" style={{width: '20%'}}>
 				<Select.Option value="">any language</Select.Option>
 				<Select.Option value="javascript">javascript</Select.Option>
 				<Select.Option value="rust">rust</Select.Option>
@@ -23,7 +23,7 @@ const Search = ({projects}) => {
 			</Select>
 		</Input.Group>
 
-		<Row gutter={[10, 10]} type="flex">
+		<Row gutter={[10, 10]} type="flex" style={{overflow: 'auto'}}>
 			{projects.map(project => (
 				<Col key={project.name} span={6}>
 					<Card title={project.name} bordered hoverable extra={project.language}>
