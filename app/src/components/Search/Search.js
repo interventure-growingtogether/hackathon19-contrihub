@@ -8,19 +8,36 @@ import ProjectIcon from './ProjectIcon';
 
 import {getRepoData} from '../../Redux/actions/getRepoData';
 
+let nameDebounce = null;
+
 const Search = ({ repos, history, getRepoData }) => {
 	const [language, setLanguage] = useState(undefined);
+	const [name, setName] = useState(undefined);
 
 	const changeLanguage = useCallback(value => {
 		setLanguage(value);
 
-		getRepoData(value, undefined, undefined);
+		getRepoData(value, name, undefined);
+	});
+
+	const changeName = useCallback(event => {
+		event.persist();
+
+		clearTimeout(nameDebounce);
+
+		nameDebounce = setTimeout(() => {
+			const value = event.target.value;
+
+			setName(value);
+
+			getRepoData(language, value, undefined);
+		}, 500);
 	});
 
 	return (
 		<div style={{ position: 'relative', top: 0, bottom: 0 }}>
 			<Input.Group compact>
-				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '20px', width: '60%' }} />
+				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '20px', width: '60%' }} onChange={changeName} />
 
 				<Select defaultValue="any language" size="large" style={{ width: '20%' }} defaultValue="" onChange={changeLanguage}>
 					<Select.Option value="">any language</Select.Option>
