@@ -5,7 +5,7 @@ import { PageHeader } from 'antd';
 import RepoDetails from './components/RepoDetails/RepoDetails';
 import LoginButton from './components/Auth/LoginButton';
 import Auth from './components/Auth/Auth';
-import Search from './components/Search';
+import Search from './components/Search/Search';
 
 import './App.css';
 import 'antd/dist/antd.css';
