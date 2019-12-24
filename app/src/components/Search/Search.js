@@ -8,8 +8,8 @@ const Search = ({projects}) => {
 	return <div>
 		<Input.Group compact>
 			<Input.Search placeholder="Project name" size="large" style={{marginBottom: '20px', width: '50%'}} />
-			<Select size="large" style={{width: '150px'}}>
-				<Select.Option value="">any language</Select.Option>
+
+			<Select size="large" style={{width: '150px'}} placeholder="any language">
 				<Select.Option value="javascript">javascript</Select.Option>
 				<Select.Option value="rust">rust</Select.Option>
 				<Select.Option value="golang">golang</Select.Option>
@@ -20,6 +20,13 @@ const Search = ({projects}) => {
 				<Select.Option value="c++">c++</Select.Option>
 				<Select.Option value="ruby">ruby</Select.Option>
 				<Select.Option value="v">v lol</Select.Option>
+			</Select>
+
+			<Select size="large" style={{width: '350px'}} mode="multiple" placeholder="any license">
+				<Select.Option value="apache-2.0">apache 2.0</Select.Option>
+				<Select.Option value="mit">MIT</Select.Option>
+				<Select.Option value="gpl-2.0">GPL 2.0</Select.Option>
+				<Select.Option value="gpl-3.0">GPL 3.0</Select.Option>
 			</Select>
 		</Input.Group>
 

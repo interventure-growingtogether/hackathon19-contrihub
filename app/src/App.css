@@ -10,6 +10,11 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: #fff;
+	background-color: #f7f7f7;
+	background-image: url("/assets/bg2.png");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 main {
@@ -23,7 +28,7 @@ h5,
 h6 {
 	margin: 0;
 	font-family: MuseoSlab, sans-serif;
-	color: #fff;
+	color: white;
 }
 
 .h-full-screen {
@@ -35,4 +40,14 @@ h6 {
 	height: 10vh;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	padding: 0!important;
+}
+
+.ant-page-header-heading {
+	width: auto;
+}
+
+.ant-page-header-content {
+	padding: 0!important;
 }
