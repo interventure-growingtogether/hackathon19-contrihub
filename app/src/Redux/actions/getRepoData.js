@@ -5,7 +5,7 @@ import actionTypes from '../actionTypes';
 export const getRepoData = (language = 'javascript') => dispatch => {
 	dispatch({ type: actionTypes.SHOW_SPINNER });
 	return axios({
-			url: `https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc"`,
+			url: `https://api.github.com/search/repositories?q=language:${language}+help-wanted-issues:>0&sort=interactions&order=desc"`,
 			method: 'GET',
 			headers: {
 				'Accept': 'application/vnd.github.mercy-preview+json',
