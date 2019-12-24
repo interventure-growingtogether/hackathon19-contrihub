@@ -3,6 +3,7 @@ import { Card, Col, Row, Tag } from 'antd';
 import ProjectIcon from '../Search/ProjectIcon';
 
 class ContribHubProjectsList  extends  React.Component{
+	// eslint-disable-next-line react/state-in-constructor
 	state = {
 		repos: [],
 	};
@@ -17,6 +18,7 @@ class ContribHubProjectsList  extends  React.Component{
 		const { history } = this.props;
 
 		return (
+			// eslint-disable-next-line react/jsx-filename-extension
 			<div style={{ margin: '2rem' }}>
 				<Row gutter={[10, 10]} type="flex" style={{ overflow: 'auto' }}>
 					{repos &&
