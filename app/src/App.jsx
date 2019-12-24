@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route,Link } from 'react-router-dom';
+import { Route,Link,Switch,Redirect } from 'react-router-dom';
 import { PageHeader, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 
@@ -30,21 +30,32 @@ function App({ getRepoData, repos, spinnerVisible }) {
 			<Row type="flex" justify="center">
 				<Col offset={1} span={22} className="App">
 					<PageHeader className="Page__header" title="ContribHub">
+						<Link to={"/Search"} >
+							<Button style={{margin:'.5rem'}}>
+								Home
+							</Button>
+						</Link>
 						<Link to={"/cprojects"} >
 							<Button style={{margin:'.5rem'}}>
 								ContribHub Projects
 							</Button>
-							</Link>
+						</Link>
+						<Link to={"/create"} >
+							<Button style={{margin:'.5rem'}}>
+								New project
+							</Button>
+						</Link>
 
 						<LoginButton />
 					</PageHeader>
-
+				<Switch>
+					<Route path="/search"  component={Search} />
+					<Redirect from="/" exact to="/search" />
 					<Route path="/auth" component={Auth} />
-
-					<Route path="/cprojects" exact component={ContribHubProjectsList} />
+					<Route path="/cprojects"  component={ContribHubProjectsList} />
 					<Route path="/details/:id"  component={RepoDetails} />
-					<Route path="/" component={Search} />
 					<Route path="/create" component={AddProject} />
+				</Switch>
 				</Col>
 			</Row>
 
@@ -59,3 +70,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { getRepoData })(App);
+//
