@@ -1,26 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { Layout, Avatar, Descriptions, Typography, Divider } from 'antd';
+import {Layout, Avatar, Descriptions, Typography, Divider, Tag} from 'antd';
 
+import { getContributors } from '../../Redux/actions/getContributors';
+import { getLanguages } from '../../Redux/actions/getRepoLanguages';
 import './RepoDetails.css';
 
 const { Paragraph } = Typography;
 const { Header, Footer, Sider, Content } = Layout;
 
-class RepoDetails extends Component {
-	render() {
-		const { repo, spinnerVisible, history } = this.props;
+function RepoDetails({ repo, spinnerVisible, getContributors, getLanguages }) {
 
-		console.log('REPO', repo);
+	// useEffect(() => {
+	// 	if (repo.collaborators_url) {
+	// 		getContributors(repo.collaborators_url);
+	// 	}
+	// }, [repo]);
+	//
+	// useEffect(() => {
+	// 	if (repo.languages_url) {
+	// 		getLanguages(repo.languages_url);
+	// 	}
+	// }, [repo]);
 
-		// fetch contributors
 
-		// fetch languages
+	// fetch contributors
 
-		// fetch issues?
+	// fetch languages
 
-		return (
+	// fetch issues?
+
+	return (
+		!spinnerVisible && (
 			<Layout className="RepoDetails h-full-screen">
 				<Sider className="RepoDetails__Sidebar">
 					<Avatar size={150} icon="user" src={repo && repo.owner && repo.owner.avatar_url} />
@@ -58,8 +69,8 @@ class RepoDetails extends Component {
 					<Footer style={{ paddingLeft: '0', background: 'none' }}>Contributors here?</Footer>
 				</Layout>
 			</Layout>
-		);
-	}
+		)
+	);
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -69,7 +80,8 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		repo,
 		spinnerVisible: state.spinner.visible,
+		languages: state.repoLanguages
 	};
 };
 
-export default withRouter(connect(mapStateToProps)(RepoDetails));
+export default connect(mapStateToProps)(RepoDetails);

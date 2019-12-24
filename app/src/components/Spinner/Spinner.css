@@ -7,5 +7,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #00ff8;
+}
+
+.Spinner__container > div {
+	background: rgba(255, 255, 255, 0.40);
+	border-radius: 50%;
 }
