@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
@@ -6,18 +6,30 @@ import { Row, Col, Card, Tag, Input, Select } from 'antd';
 
 import ProjectIcon from './ProjectIcon';
 
-const Search = ({ repos, history }) => {
+import {getRepoData} from '../../Redux/actions/getRepoData';
+
+const Search = ({ repos, history, getRepoData }) => {
+	const [language, setLanguage] = useState(undefined);
+
+	const changeLanguage = useCallback(value => {
+		setLanguage(value);
+
+		getRepoData(value, undefined, undefined);
+	});
+
 	return (
 		<div style={{ position: 'relative', top: 0, bottom: 0 }}>
 			<Input.Group compact>
 				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '20px', width: '60%' }} />
-				<Select defaultValue="any language" size="large" style={{ width: '20%' }} placeholder="any language">
+
+				<Select defaultValue="any language" size="large" style={{ width: '20%' }} defaultValue="" onChange={changeLanguage}>
+					<Select.Option value="">any language</Select.Option>
 					<Select.Option value="javascript">javascript</Select.Option>
 					<Select.Option value="rust">rust</Select.Option>
 					<Select.Option value="golang">golang</Select.Option>
 					<Select.Option value="java">java</Select.Option>
 					<Select.Option value="python">python</Select.Option>
-					<Select.Option value="dotnet">dotnet</Select.Option>
+					<Select.Option value="c#">dotnet</Select.Option>
 					<Select.Option value="haskell">haskell</Select.Option>
 					<Select.Option value="c++">c++</Select.Option>
 					<Select.Option value="ruby">ruby</Select.Option>
@@ -109,4 +121,4 @@ const mapStateToProps = state => ({
 	repos: state.repos.data,
 });
 
-export default withRouter(connect(mapStateToProps)(Search));
+export default withRouter(connect(mapStateToProps, {getRepoData})(Search));
