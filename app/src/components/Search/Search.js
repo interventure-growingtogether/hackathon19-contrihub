@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { Row, Col, Card, Tag, Input, Select } from 'antd';
 
 import ProjectIcon from './ProjectIcon';
-import Spinner from '../Spinner/Spinner';
 
-const Search = ({ repos, spinnerVisible }) => {
+const Search = ({ repos, history }) => {
 	return (
 		<div style={{ position: 'relative', top: 0, bottom: 0 }}>
 			<Input.Group compact>
-				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '20px', width: '80%' }} />
-				<Select defaultValue="any language" size="large" style={{ width: '20%' }}placeholder="any language">
+				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '20px', width: '60%' }} />
+				<Select defaultValue="any language" size="large" style={{ width: '20%' }} placeholder="any language">
 					<Select.Option value="javascript">javascript</Select.Option>
 					<Select.Option value="rust">rust</Select.Option>
 					<Select.Option value="golang">golang</Select.Option>
@@ -21,20 +21,21 @@ const Search = ({ repos, spinnerVisible }) => {
 					<Select.Option value="haskell">haskell</Select.Option>
 					<Select.Option value="c++">c++</Select.Option>
 					<Select.Option value="ruby">ruby</Select.Option>
-					<Select.Option value="v">v lol</Select.Option></Select>
+					<Select.Option value="v">v lol</Select.Option>
+				</Select>
 
-			<Select size="large" style={{width: '350px'}} mode="multiple" placeholder="any license">
-				<Select.Option value="apache-2.0">apache 2.0</Select.Option>
-				<Select.Option value="mit">MIT</Select.Option>
-				<Select.Option value="gpl-2.0">GPL 2.0</Select.Option>
-				<Select.Option value="gpl-3.0">GPL 3.0</Select.Option>
+				<Select size="large" style={{ width: '20%' }} mode="multiple" placeholder="any license">
+					<Select.Option value="apache-2.0">apache 2.0</Select.Option>
+					<Select.Option value="mit">MIT</Select.Option>
+					<Select.Option value="gpl-2.0">GPL 2.0</Select.Option>
+					<Select.Option value="gpl-3.0">GPL 3.0</Select.Option>
 				</Select>
 			</Input.Group>
 
-			<Row gutter={[10, 10]} type="flex" style={{overflow: 'auto'}}>
+			<Row gutter={[10, 10]} type="flex" style={{ overflow: 'auto' }}>
 				{repos &&
 					repos.map(project => (
-						<Col key={project.full_name} span={6}>
+						<Col key={project.full_name} span={6} onClick={() => history.push(`details/${project.id}`)}>
 							<Card title={project.full_name} bordered hoverable extra={project.language}>
 								<div>
 									{project.topics &&
@@ -108,4 +109,4 @@ const mapStateToProps = state => ({
 	repos: state.repos.data,
 });
 
-export default connect(mapStateToProps)(Search);
+export default withRouter(connect(mapStateToProps)(Search));

@@ -33,7 +33,7 @@ function App({ getRepoData, repos, spinnerVisible }) {
 					</PageHeader>
 
 					<Route path="/auth" component={Auth} />
-					<Route path="/details" component={RepoDetails} />
+					<Route path="/details/:id" component={RepoDetails} />
 					<Route path="/" component={Search} />
 					<Route path="/create" component={AddProject} />
 				</Col>
