@@ -17,6 +17,12 @@ export const getRepoData = (language, name, licenses) => dispatch => {
 		queryParams.push(`language:${language}`);
 	}
 
+	if (licenses && licenses.length > 0) {
+		licenses.forEach(license => {
+			queryParams.push(`license:${license}`);
+		});
+	}
+
 	const query = queryParams.join('+');
 
 	return axios({

@@ -9,15 +9,17 @@ import ProjectIcon from './ProjectIcon';
 import { getRepoData } from '../../Redux/actions/getRepoData';
 
 let nameDebounce = null;
+let licensesDebounce = null;
 
 const Search = ({ repos, history, getRepoData }) => {
 	const [language, setLanguage] = useState(undefined);
 	const [name, setName] = useState(undefined);
+	const [licenses, setLicenses] = useState([]);
 
 	const changeLanguage = useCallback(value => {
 		setLanguage(value);
 
-		getRepoData(value, name, undefined);
+		getRepoData(value, name, licenses);
 	});
 
 	const changeName = useCallback(event => {
@@ -30,14 +32,24 @@ const Search = ({ repos, history, getRepoData }) => {
 
 			setName(value);
 
-			getRepoData(language, value, undefined);
+			getRepoData(language, value, licenses);
+		}, 500);
+	});
+
+	const changeLicenses = useCallback(values => {
+		clearTimeout(licensesDebounce);
+
+		licensesDebounce = setTimeout(() => {
+			setLicenses(values);
+
+			getRepoData(language, name, values);
 		}, 500);
 	});
 
 	return (
 		<div style={{ position: 'relative', top: 0, bottom: 0 }}>
 			<Input.Group compact>
-				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '10px', width: '80%' }} />
+				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '10px', width: '80%' }} onChange={changeName} />
 
 				<Select
 					defaultValue="any language"
@@ -60,11 +72,11 @@ const Search = ({ repos, history, getRepoData }) => {
 				</Select>
 
 				<Select
-					defaultValue="any licence"
 					size="large"
 					style={{ width: 'auto', minWidth: '150px', marginBottom: '10px' }}
 					mode="multiple"
 					placeholder="any license"
+					onChange={changeLicenses}
 				>
 					<Select.Option value="apache-2.0">apache 2.0</Select.Option>
 					<Select.Option value="mit">MIT</Select.Option>
