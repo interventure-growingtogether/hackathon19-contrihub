@@ -16,9 +16,13 @@ class RepoDetails extends Component {
 
 		console.log('REPO', repo);
 
-		return spinnerVisible ? (
-			<Spinner />
-		) : (
+		// fetch contributors
+
+		// fetch languages
+
+		// fetch issues?
+
+		return (
 			<Layout className="RepoDetails h-full-screen">
 				<Sider className="RepoDetails__Sidebar">
 					<Avatar size={150} icon="user" src={repo && repo.owner && repo.owner.avatar_url} />
