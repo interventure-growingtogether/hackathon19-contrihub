@@ -1,0 +1,68 @@
+{
+  "env": {
+    "browser": true,
+    "amd": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["jest", "react-hooks"],
+  "extends": ["airbnb", "prettier", "prettier/react", "plugin:jest/recommended"],
+  "rules": {
+    "arrow-parens": 0,
+    "no-nested-ternary": 0,
+    "radix": 0,
+    "react/forbid-prop-types": 0,
+    "linebreak-style": 0,
+    "no-underscore-dangle": 0,
+    "no-console": 1,
+    "no-debugger": 1,
+    "func-style": 0,
+    "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
+    "no-alert": 2,
+    "react/no-multi-comp": 2,
+    "react/sort-comp": [
+      2,
+      {
+        "order": ["static-methods", "static-variables", "instance-variables", "lifecycle", "everything-else", "render"]
+      }
+    ],
+    "react/prop-types": [2, { "ignore": ["location", "history", "children", "match"] }],
+    "react/require-default-props": 0,
+    "react/button-has-type": 0,
+    "no-shadow": 0,
+    "import/no-unresolved": [2, { "ignore": ["assets"] }],
+    "react/destructuring-assignment": 0,
+    "react/no-unescaped-entities": 0,
+    "no-bitwise": 0,
+    "no-plusplus": 0,
+    "no-param-reassign": 0,
+    "import/no-mutable-exports": 0,
+    "import/no-named-as-default": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "ignoreCase": true,
+        "noSortAlphabetically": false
+      }
+    ],
+    "react/sort-prop-types": [
+      2,
+      {
+        "requiredFirst": true,
+        "ignoreCase": true,
+        "sortShapeProp": true,
+        "noSortAlphabetically": false
+      }
+    ]
+  }
+}
