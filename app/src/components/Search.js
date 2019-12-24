@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Row, Col, Card, Tag} from "antd";
+import {Row, Col, Card, Tag, Input} from "antd";
 
 const Search = ({projects}) => {
 	return <div>
+		<Input.Search placeholder="Search projects..." size="large" style={{marginBottom: '20px'}} />
 		<Row gutter={[10, 10]} type="flex">
 			{projects.map(project => (
 				<Col key={project.name} span={6}>
