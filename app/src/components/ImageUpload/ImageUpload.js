@@ -49,7 +49,7 @@ export default function ImageUpload(props) {
 			name="avatar"
 			listType="picture-card"
 			className="avatar-uploader"
-			showUploadList={props.maxImages > 1}
+			showUploadList={props.maxImages >= 1}
 			beforeUpload={handleBeforeUpload}
 			onChange={handleChange}
 			fileList={fileList}

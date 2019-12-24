@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
@@ -6,7 +6,17 @@ import { Row, Col, Card, Tag, Input, Select } from 'antd';
 
 import ProjectIcon from './ProjectIcon';
 
-const Search = ({ repos, history }) => {
+import {getRepoData} from '../../Redux/actions/getRepoData';
+
+const Search = ({ repos, history, getRepoData }) => {
+	const [language, setLanguage] = useState(undefined);
+
+	const changeLanguage = useCallback(value => {
+		setLanguage(value);
+
+		getRepoData(value, undefined, undefined);
+	});
+
 	return (
 		<div style={{ position: 'relative', top: 0, bottom: 0 }}>
 			<Input.Group compact>
@@ -17,14 +27,14 @@ const Search = ({ repos, history }) => {
 					<Select.Option value="golang">golang</Select.Option>
 					<Select.Option value="java">java</Select.Option>
 					<Select.Option value="python">python</Select.Option>
-					<Select.Option value="dotnet">dotnet</Select.Option>
+					<Select.Option value="c#">dotnet</Select.Option>
 					<Select.Option value="haskell">haskell</Select.Option>
 					<Select.Option value="c++">c++</Select.Option>
 					<Select.Option value="ruby">ruby</Select.Option>
 					<Select.Option value="v">v lol</Select.Option>
 				</Select>
 
-				<Select defaultValue="any licence" size="large" style={{ width: 'auto', marginBottom: '10px' }} mode="multiple" placeholder="any license">
+				<Select defaultValue="any licence" size="large" style={{ width: '80%', marginBottom: '10px' }} mode="multiple" placeholder="any license">
 					<Select.Option value="apache-2.0">apache 2.0</Select.Option>
 					<Select.Option value="mit">MIT</Select.Option>
 					<Select.Option value="gpl-2.0">GPL 2.0</Select.Option>
@@ -109,4 +119,4 @@ const mapStateToProps = state => ({
 	repos: state.repos.data,
 });
 
-export default withRouter(connect(mapStateToProps)(Search));
+export default withRouter(connect(mapStateToProps, {getRepoData})(Search));

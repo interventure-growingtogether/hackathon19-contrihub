@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route,Link } from 'react-router-dom';
 import { PageHeader, Row, Col } from 'antd';
 import { connect } from 'react-redux';
+
+import AddProject from "./Containers/AddProject";
 
 import RepoDetails from './components/RepoDetails/RepoDetails';
 import LoginButton from './components/Auth/LoginButton';
 import Auth from './components/Auth/Auth';
 import Search from './components/Search/Search';
 import Spinner from './components/Spinner/Spinner';
-
 import 'antd/dist/antd.css';
 import './App.css';
 import { getRepoData } from './Redux/actions/getRepoData';
+import ContribHubProjectsList from "./components/ContribHubProjects/ContribHubProjectsList"
+import {Button} from "antd";
 
 function App({ getRepoData, repos, spinnerVisible }) {
 	useEffect(() => {
@@ -27,12 +30,26 @@ function App({ getRepoData, repos, spinnerVisible }) {
 			<Row type="flex" justify="center">
 				<Col offset={1} span={22} className="App">
 					<PageHeader className="Page__header" title="ContribHub">
+						<Link to={"/cprojects"} >
+							<Button style={{margin:'.5rem'}}>
+								ContribHub Projects
+							</Button>
+						</Link>
+						<Link to={"/create"} >
+							<Button style={{margin:'.5rem'}}>
+								New project
+							</Button>
+						</Link>
+
 						<LoginButton />
 					</PageHeader>
 
 					<Route path="/auth" component={Auth} />
-					<Route path="/details/:id" component={RepoDetails} />
-					<Route path="/" component={Search} />
+
+					<Route path="/cprojects" exact component={ContribHubProjectsList} />
+					<Route path="/details/:id"  component={RepoDetails} />
+					<Route path="/" exact component={Search} />
+					<Route path="/create" component={AddProject} />
 				</Col>
 			</Row>
 
