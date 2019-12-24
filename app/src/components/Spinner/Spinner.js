@@ -6,7 +6,7 @@ import './Spinner.css';
 const Spinner = props => {
 	return (
 		<div className="Spinner__container">
-			<MagicSpinner size={150} color="#686769" />
+			<MagicSpinner size={250} color="#686769" />
 		</div>
 	);
 };

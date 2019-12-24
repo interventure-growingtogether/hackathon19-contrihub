@@ -1,5 +1,6 @@
 .RepoDetails {
 	color: white;
+	background: white !important;
 }
 
 .RepoDetails__Sidebar {
@@ -8,10 +9,20 @@
 	align-items: center;
 	padding-top: 2rem;
 	color: white;
+	background: white !important;
+	min-width: 300px !important;
 }
 
 .RepoDetails__Header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	background: white !important;
+	color: #353535;
+	padding-left: 0 !important;
+	font-size: 26px;
+}
+
+.RepoDetails__Content {
+	background: white !important;
 }

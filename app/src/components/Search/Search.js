@@ -1,57 +1,64 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {Row, Col, Card, Tag, Input, InputGroup, Select} from "antd";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Row, Col, Card, Tag, Input, Select } from 'antd';
 
 import ProjectIcon from './ProjectIcon';
+import Spinner from '../Spinner/Spinner';
 
-const Search = ({projects}) => {
-	return <div>
-		<Input.Group compact>
-			<Input.Search placeholder="Project name" size="large" style={{marginBottom: '20px', width: '50%'}} />
-
-			<Select size="large" style={{width: '150px'}} placeholder="any language">
-				<Select.Option value="javascript">javascript</Select.Option>
-				<Select.Option value="rust">rust</Select.Option>
-				<Select.Option value="golang">golang</Select.Option>
-				<Select.Option value="java">java</Select.Option>
-				<Select.Option value="python">python</Select.Option>
-				<Select.Option value="dotnet">dotnet</Select.Option>
-				<Select.Option value="haskell">haskell</Select.Option>
-				<Select.Option value="c++">c++</Select.Option>
-				<Select.Option value="ruby">ruby</Select.Option>
-				<Select.Option value="v">v lol</Select.Option>
-			</Select>
+const Search = ({ repos, spinnerVisible }) => {
+	return (
+		<div style={{ position: 'relative', top: 0, bottom: 0 }}>
+			<Input.Group compact>
+				<Input.Search placeholder="Project name" size="large" style={{ marginBottom: '20px', width: '80%' }} />
+				<Select defaultValue="any language" size="large" style={{ width: '20%' }}placeholder="any language">
+					<Select.Option value="javascript">javascript</Select.Option>
+					<Select.Option value="rust">rust</Select.Option>
+					<Select.Option value="golang">golang</Select.Option>
+					<Select.Option value="java">java</Select.Option>
+					<Select.Option value="python">python</Select.Option>
+					<Select.Option value="dotnet">dotnet</Select.Option>
+					<Select.Option value="haskell">haskell</Select.Option>
+					<Select.Option value="c++">c++</Select.Option>
+					<Select.Option value="ruby">ruby</Select.Option>
+					<Select.Option value="v">v lol</Select.Option></Select>
 
 			<Select size="large" style={{width: '350px'}} mode="multiple" placeholder="any license">
 				<Select.Option value="apache-2.0">apache 2.0</Select.Option>
 				<Select.Option value="mit">MIT</Select.Option>
 				<Select.Option value="gpl-2.0">GPL 2.0</Select.Option>
 				<Select.Option value="gpl-3.0">GPL 3.0</Select.Option>
-			</Select>
-		</Input.Group>
+				</Select>
+			</Input.Group>
 
-		<Row gutter={[10, 10]} type="flex">
-			{projects.map(project => (
-				<Col key={project.name} span={6}>
-					<Card title={project.name} bordered hoverable extra={project.language}>
-						<div>{project.tags && project.tags.map(tag => <Tag key={`${project.name}-tag-${tag}`}>{tag}</Tag>)}</div>
-						<div style={{marginTop: '10px'}}>
-							<ProjectIcon type="star" number={project.stars} />
-							<ProjectIcon type="eye" number={project.issues} />
-						</div>
-					</Card>
-				</Col>
-			))}
-		</Row>
-	</div>;
+			<Row gutter={[10, 10]} type="flex" style={{overflow: 'auto'}}>
+				{repos &&
+					repos.map(project => (
+						<Col key={project.full_name} span={6}>
+							<Card title={project.full_name} bordered hoverable extra={project.language}>
+								<div>
+									{project.topics &&
+										project.topics.map(topic => <Tag key={`${project.name}-tag-${topic}`}>{topic}</Tag>)}
+								</div>
+
+								<div style={{ marginTop: '10px' }}>
+									<ProjectIcon type="star" number={project.stargazers_count} />
+									<ProjectIcon type="eye" number={project.open_issues} />
+								</div>
+							</Card>
+						</Col>
+					))}
+			</Row>
+		</div>
+	);
 };
 
 Search.propTypes = {
-	projects: PropTypes.arrayOf(PropTypes.object),
+	repos: PropTypes.arrayOf(PropTypes.object),
 };
 
 Search.defaultProps = {
-	projects: [
+	repos: [
 		{
 			name: 'react-super-cool-slider',
 			language: 'javascript',
@@ -93,8 +100,12 @@ Search.defaultProps = {
 			tags: ['web assembly', 'perfectly moral'],
 			stars: 9493,
 			issues: 5,
-		}
+		},
 	],
 };
 
-export default Search;
+const mapStateToProps = state => ({
+	repos: state.repos.data,
+});
+
+export default connect(mapStateToProps)(Search);
