@@ -20,7 +20,7 @@ export const getRepoData = (language, name, licenses) => dispatch => {
 	const query = queryParams.join('+');
 
 	return axios({
-			url: `https://api.github.com/search/repositories?q={$query}&sort=interactions&order=desc"`,
+			url: `https://api.github.com/search/repositories?q=${query}&sort=interactions&order=desc"`,
 			method: 'GET',
 			headers: {
 				'Accept': 'application/vnd.github.mercy-preview+json',

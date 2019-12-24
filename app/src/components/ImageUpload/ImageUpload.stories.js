@@ -11,7 +11,7 @@ storiesOf('ImageUpload', module).add('Default', () => {
 		<ImageUpload
 			prefixId={uuid()}
 			shouldUpload={false}
-			maxImages={5}
+			maxImages={1}
 			shouldUpload={boolean('Should upload?', false)}
 		/>
 	);
