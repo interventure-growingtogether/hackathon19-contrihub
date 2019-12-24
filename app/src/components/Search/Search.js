@@ -74,7 +74,7 @@ const Search = ({ repos, history, getRepoData }) => {
 				<Select
 					defaultValue="any licence"
 					size="large"
-					style={{ width: '20%', marginBottom: '10px' }}
+					style={{ width: 'auto', minWidth: '150px', marginBottom: '10px' }}
 					mode="multiple"
 					placeholder="any license"
 					onChange={changeLicenses}
