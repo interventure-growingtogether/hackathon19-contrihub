@@ -34,7 +34,12 @@ function App({ getRepoData, repos, spinnerVisible }) {
 							<Button style={{margin:'.5rem'}}>
 								ContribHub Projects
 							</Button>
-							</Link>
+						</Link>
+						<Link to={"/create"} >
+							<Button style={{margin:'.5rem'}}>
+								New project
+							</Button>
+						</Link>
 
 						<LoginButton />
 					</PageHeader>
@@ -43,7 +48,7 @@ function App({ getRepoData, repos, spinnerVisible }) {
 
 					<Route path="/cprojects" exact component={ContribHubProjectsList} />
 					<Route path="/details/:id"  component={RepoDetails} />
-					<Route path="/" component={Search} />
+					<Route path="/" exact component={Search} />
 					<Route path="/create" component={AddProject} />
 				</Col>
 			</Row>

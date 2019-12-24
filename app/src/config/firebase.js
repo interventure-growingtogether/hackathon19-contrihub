@@ -14,6 +14,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const databaseRef = firebase.database().ref();
+export const database = firebase.database();
 export const hackathon19Ref = databaseRef.child('hackathon19');
 export const authRef = firebase.auth();
 export const provider = new firebase.auth.GoogleAuthProvider();
