@@ -16,9 +16,11 @@ export const getLanguages = url => dispatch => {
       dispatch({ type: actionTypes.HIDE_SPINNER });
 
       if (res.data) {
+
+        console.log("languages", res.data);
         return dispatch({
           type: actionTypes.GET_REPO_LANGUAGES_SUCCESS,
-          payload: res.data.items,
+          payload: res.data,
         });
       }
     })
