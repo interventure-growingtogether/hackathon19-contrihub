@@ -2,10 +2,25 @@ import axios from 'axios';
 
 import actionTypes from '../actionTypes';
 
-export const getRepoData = (language = 'javascript') => dispatch => {
+export const getRepoData = (language, name, licenses) => dispatch => {
 	dispatch({ type: actionTypes.SHOW_SPINNER });
+
+	const queryParams = [
+		'help-wanted-issues:>0',
+	];
+
+	if (name) {
+		queryParams.push(`${name} in:name`);
+	}
+
+	if (language) {
+		queryParams.push(`language:${language}`);
+	}
+
+	const query = queryParams.join('+');
+
 	return axios({
-			url: `https://api.github.com/search/repositories?q=language:${language}+help-wanted-issues:>0&sort=interactions&order=desc"`,
+			url: `https://api.github.com/search/repositories?q={$query}&sort=interactions&order=desc"`,
 			method: 'GET',
 			headers: {
 				'Accept': 'application/vnd.github.mercy-preview+json',
