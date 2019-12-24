@@ -1,36 +1,60 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { Layout, Avatar } from 'antd';
+import { Layout, Avatar, Descriptions, Typography, Divider } from 'antd';
 
+import Spinner from '../Spinner/Spinner';
 import './RepoDetails.css';
+
+const { Title, Paragraph, Text } = Typography;
 
 const { Header, Footer, Sider, Content } = Layout;
 
 class RepoDetails extends Component {
 	render() {
-		return (
-			<Layout className="h-full-screen">
+		const { repo, spinnerVisible } = this.props;
+
+		console.log('REPO', repo);
+
+		return spinnerVisible ? (
+			<Spinner />
+		) : (
+			<Layout className="RepoDetails h-full-screen">
 				<Sider className="RepoDetails__Sidebar">
-					<Avatar size={150} icon="user" />
-					<h2 style={{ paddingTop: '2rem' }}>Github username</h2>
+					<Avatar size={150} icon="user" src={repo && repo.owner && repo.owner.avatar_url} />
+					<h5 style={{ paddingTop: '2rem', textAlign: 'center' }}>Project owner</h5>
+					<h2>{repo && repo.owner && repo.owner.login}</h2>
 				</Sider>
 
 				<Layout>
-					<Header className="RepoDetails__Header">
-						Repo name here
-						<a
-							className="github-button"
-							href="https://github.com/ntkme/github-buttons"
-							data-size="large"
-							data-show-count="true"
-							aria-label="Star ntkme/github-buttons on GitHub"
-						>
-							Star
-						</a>
-					</Header>
+					<Header className="RepoDetails__Header">{repo ? repo.full_name : ''}</Header>
+
+					<Divider />
+
+					<Paragraph style={{ paddingLeft: '1rem', paddingRight: '1rem', marginBottom: 0 }}>
+						{repo ? repo.description : null}
+					</Paragraph>
+
+					<Divider />
+
 					<Content style={{ color: 'black', padding: '2rem' }}>
-						Repo details (use Description Ant module?)
+						<Descriptions title="Repo details">
+							<Descriptions.Item label="Github stars">
+								{repo ? repo.stargazers_count : null}
+							</Descriptions.Item>
+							<Descriptions.Item label="Github watchers">
+								{repo ? repo.watchers_count : null}
+							</Descriptions.Item>
+							<Descriptions.Item label="Forks">{repo ? repo.forks_count : null}</Descriptions.Item>
+							<Descriptions.Item label="Open issues">
+								{repo ? repo.open_issues_count : null}
+							</Descriptions.Item>
+							<Descriptions.Item label="Lines of code">{repo ? repo.size : null}</Descriptions.Item>
+						</Descriptions>
+
+						<Divider />
 					</Content>
+
 					<Footer>Contributors here?</Footer>
 				</Layout>
 			</Layout>
@@ -38,4 +62,9 @@ class RepoDetails extends Component {
 	}
 }
 
-export default RepoDetails;
+const mapStateToProps = (state, ownProps) => ({
+	repo: state.repos.data[0],
+	spinnerVisible: state.spinner.visible,
+});
+
+export default connect(mapStateToProps)(RepoDetails);

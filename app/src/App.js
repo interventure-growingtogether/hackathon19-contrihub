@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { PageHeader, Row, Col } from 'antd';
+import { connect } from 'react-redux';
 
 import RepoDetails from './components/RepoDetails/RepoDetails';
 import LoginButton from './components/Auth/LoginButton';
@@ -9,8 +10,17 @@ import Search from './components/Search/Search';
 
 import 'antd/dist/antd.css';
 import './App.css';
+import { getRepoData } from './Redux/actions/getRepoData';
 
-function App() {
+function App({ getRepoData, repos }) {
+	useEffect(() => {
+		getRepoData();
+	}, []);
+
+	useEffect(() => {
+		console.log('REPOS CHANGED', repos);
+	}, [repos]);
+
 	return (
 		<Row type="flex" justify="center">
 			<Col offset={1} span={22} className="App">
@@ -26,4 +36,8 @@ function App() {
 	);
 }
 
-export default App;
+const mapStateToProps = state => ({
+	repos: state.repos,
+});
+
+export default connect(mapStateToProps, { getRepoData })(App);
