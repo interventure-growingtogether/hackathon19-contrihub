@@ -1,17 +1,25 @@
 import React from 'react';
 import { Card, Col, Row, Tag } from 'antd';
 import ProjectIcon from '../Search/ProjectIcon';
+import { database } from '../../config/firebase';
 
-class ContribHubProjectsList  extends  React.Component{
+class ContribHubProjectsList extends React.Component {
 	// eslint-disable-next-line react/state-in-constructor
 	state = {
 		repos: [],
 	};
 
 	componentDidMount() {
+		database.ref('projects').on('value', (a)  =>{
+			const value = a.val();
+			Object.keys(value).forEach(key => {
+				const id = key;
 
-
-  }
+				const {  Language, Name } = value[key].project;
+				this.setState(state=>state.repos.push({id, name:Name,language:Language}))
+			});
+		});
+	}
 
 	render() {
 		const { repos } = this.state;
