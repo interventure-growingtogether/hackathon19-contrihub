@@ -8,7 +8,7 @@ const Search = ({projects}) => {
 		<Row gutter={[10, 10]} type="flex">
 			{projects.map(project => (
 				<Col key={project.name} span={6}>
-					<Card title={project.name} bordered hoverable>
+					<Card title={project.name} bordered hoverable extra={project.language}>
 						{project.tags && project.tags.map(tag => <Tag key={`${project.name}-tag-${tag}`}>{tag}</Tag>)}
 					</Card>
 				</Col>
@@ -25,27 +25,33 @@ Search.defaultProps = {
 	projects: [
 		{
 			name: 'react-super-cool-slider',
-			tags: ['javascript', 'react', 'component'],
+			language: 'javascript',
+			tags: ['react', 'component'],
 		},
 		{
 			name: 'next-redux-killer-tyool-2020',
-			tags: ['javascript', 'state management', 'hype'],
+			language: 'javascript',
+			tags: ['state management', 'hype'],
 		},
 		{
 			name: 'just-migrated-to-hooks-check-it-out',
-			tags: ['javascript', 'react', 'hooks', 'hype'],
+			language: 'javascript',
+			tags: ['react', 'hooks', 'hype'],
 		},
 		{
 			name: 'serverless-kubernates-deep-blockchain',
-			tags: ['golang', 'hype', 'blockchain', 'machine learning', 'serverless', 'kubernates', 'docker', 'did i say hype?'],
+			language: 'golang',
+			tags: ['hype', 'blockchain', 'machine learning', 'serverless', 'kubernates', 'docker', 'did i say hype?'],
 		},
 		{
 			name: 'react-dark-mode-toggle',
-			tags: ['javascript', 'react', 'component'],
+			language: 'javascript',
+			tags: ['react', 'component'],
 		},
 		{
 			name: 'rust-wasm-compiler',
-			tags: ['rust', 'web assembly', 'perfectly moral']
+			language: 'rust',
+			tags: ['web assembly', 'perfectly moral']
 		}
 	],
 };
