@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { withRouter } from 'react-router-dom';
 import { Layout, Avatar, Descriptions, Typography, Divider } from 'antd';
 
-import Spinner from '../Spinner/Spinner';
 import './RepoDetails.css';
 
 const { Paragraph } = Typography;
-
 const { Header, Footer, Sider, Content } = Layout;
 
 class RepoDetails extends Component {
 	render() {
-		const { repo, spinnerVisible } = this.props;
+		const { repo, spinnerVisible, history } = this.props;
 
 		console.log('REPO', repo);
 
@@ -30,7 +28,7 @@ class RepoDetails extends Component {
 					<h2 style={{ textAlign: 'center' }}>{repo && repo.owner && repo.owner.login}</h2>
 				</Sider>
 
-				<Layout className='RepoDetails__Content'>
+				<Layout className="RepoDetails__Content">
 					<Header className="RepoDetails__Header">{repo ? repo.full_name : ''}</Header>
 
 					<Paragraph style={{ paddingLeft: '0', paddingRight: '1rem', marginBottom: 0 }}>
@@ -64,9 +62,14 @@ class RepoDetails extends Component {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => ({
-	repo: state.repos.data[0],
-	spinnerVisible: state.spinner.visible,
-});
+const mapStateToProps = (state, ownProps) => {
+	const projectId = ownProps.match && ownProps.match.params && parseInt(ownProps.match.params.id);
+	const repo = state.repos.data.find(project => project.id === projectId) || {};
 
-export default connect(mapStateToProps)(RepoDetails);
+	return {
+		repo,
+		spinnerVisible: state.spinner.visible,
+	};
+};
+
+export default withRouter(connect(mapStateToProps)(RepoDetails));
