@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Col, Row, Tag } from 'antd';
 import ProjectIcon from '../Search/ProjectIcon';
 
-class ContribHubProjectsList {
+class ContribHubProjectsList  extends  React.Component{
 	state = {
 		repos: [],
 	};

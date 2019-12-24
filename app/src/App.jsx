@@ -34,7 +34,12 @@ function App({ getRepoData, repos, spinnerVisible }) {
 							<Button style={{margin:'.5rem'}}>
 								ContribHub Projects
 							</Button>
-							</Link>
+						</Link>
+						<Link to={"/create"} >
+							<Button style={{margin:'.5rem'}}>
+								New project
+							</Button>
+						</Link>
 
 						<LoginButton />
 					</PageHeader>
@@ -60,3 +65,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { getRepoData })(App);
+//

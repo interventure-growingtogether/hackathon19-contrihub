@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 import CustomInput from "./Components/Input";
-import uid from 'uuid';
+import ImageUpload from "../components/ImageUpload/ImageUpload";
+import { database } from '../config/firebase';
+
+import uuid from 'uuid';
 
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
 class AddProject extends Component {
+    state = {
+        shouldUpload: false
+    };
+    uid = uuid();
+
     componentDidMount() {
         // To disable submit button at the beginning.
         // eslint-disable-next-line react/prop-types
         this.props.form.validateFields();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevState.shouldUpload && this.state.shouldUpload) {
+            this.props.history.push('/');
+        }
     }
 
     handleSubmit = e => {
@@ -19,6 +33,19 @@ class AddProject extends Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                const { description, title, skillLevel, technologies, repo} = values;
+                const project = {
+                    description, title, skillLevel, technologies, repo
+                };
+                try {
+                    database.ref(`projects/${this.uid}`).set({
+                        project, id: this.uid
+                    });
+                    this.setState({shouldUpload: true});
+                }
+                catch(e){
+                    console.log('eee: ', e);
+                }
             }
         });
     };
@@ -36,7 +63,7 @@ class AddProject extends Component {
             <Form layout="vertical" onSubmit={this.handleSubmit} style={{width: '100%', padding: '25px 25px'}}>
                 <Row>
                     <Col span={8}>
-                        IMAGE UPLOAD
+                        <ImageUpload onChange={this.onImageUpload} prefixId={this.uid} maxImages={1} shouldUpload={this.state.shouldUpload}/>
                     </Col>
                     <Col span={16}>
                         <Form.Item validateStatus={titleError ? 'error' : ''} help={titleError || ''}>
