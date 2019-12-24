@@ -17,7 +17,7 @@ const Root = () => (
 	<Provider store={store}>
 		<Router>
 			<main className="App">
-				<PageHeader title="ContriHub">
+				<PageHeader className="Page__header" title="ContriHub">
 					<LoginButton />
 				</PageHeader>
 

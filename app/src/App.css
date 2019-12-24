@@ -30,3 +30,8 @@ h6 {
 	height: 90vh;
 	width: 100%;
 }
+
+.Page__header {
+	height: 10vh;
+	display: flex;
+}
