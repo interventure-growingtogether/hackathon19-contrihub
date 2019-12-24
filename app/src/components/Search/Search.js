@@ -37,8 +37,8 @@ const Search = ({ repos, spinnerVisible }) => {
 						<Col key={project.full_name} span={6}>
 							<Card title={project.full_name} bordered hoverable extra={project.language}>
 								<div>
-									{project.tags &&
-										project.tags.map(tag => <Tag key={`${project.name}-tag-${tag}`}>{tag}</Tag>)}
+									{project.topics &&
+										project.topics.map(topic => <Tag key={`${project.name}-tag-${topic}`}>{topic}</Tag>)}
 								</div>
 
 								<div style={{ marginTop: '10px' }}>

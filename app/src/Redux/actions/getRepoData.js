@@ -4,8 +4,13 @@ import actionTypes from '../actionTypes';
 
 export const getRepoData = (language = 'javascript') => dispatch => {
 	dispatch({ type: actionTypes.SHOW_SPINNER });
-	return axios
-		.get(`https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc"`)
+	return axios({
+			url: `https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc"`,
+			method: 'GET',
+			headers: {
+				'Accept': 'application/vnd.github.mercy-preview+json',
+			},
+		})
 		.then(res => {
 			dispatch({ type: actionTypes.HIDE_SPINNER });
 
