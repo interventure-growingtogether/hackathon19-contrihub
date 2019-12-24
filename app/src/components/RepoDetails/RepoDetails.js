@@ -9,10 +9,11 @@ const { Header, Footer, Sider, Content } = Layout;
 class RepoDetails extends Component {
 	render() {
 		return (
-			<Layout className="h-full-screen">
+			<Layout className="RepoDetails h-full-screen">
 				<Sider className="RepoDetails__Sidebar">
 					<Avatar size={150} icon="user" />
-					<h2 style={{ paddingTop: '2rem' }}>Github username</h2>
+					<h5 style={{ paddingTop: '2rem', textAlign: 'center' }}>Project owner</h5>
+					<h2>Github username</h2>
 				</Sider>
 
 				<Layout>
