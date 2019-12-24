@@ -1,17 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { PageHeader } from 'antd';
-
-import 'antd/dist/antd.css';
-
-import LoginButton from './components/Auth/LoginButton';
-import Auth from './components/Auth/Auth';
 import { Provider } from 'react-redux';
 
 import store from './Redux';
 
-import './App.css';
 import RepoDetails from './components/RepoDetails/RepoDetails';
+import LoginButton from './components/Auth/LoginButton';
+import Auth from './components/Auth/Auth';
+import Search from './components/Search';
+
+import "./App.css";
+import 'antd/dist/antd.css';
 
 const Root = () => (
 	<Provider store={store}>
@@ -23,6 +23,7 @@ const Root = () => (
 
 				<Route path="/auth" component={Auth} />
 				<Route path="/details" component={RepoDetails} />
+				<Route path="/landing" component={Search} />
 			</main>
 		</Router>
 	</Provider>
